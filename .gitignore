@@ -1,0 +1,8 @@
+db.sqlite
+system/config.php
+cache
+public/post-img
+public/wp-content
+sitemap.xml
+composer.lock
+vendor
