@@ -24,6 +24,8 @@ return [
     'label_resolution'    => 'Resolución',
     'label_date'          => 'Fecha',
     'label_posts'         => 'Posts asignados',
+    'label_password'      => 'Contraseña',
+    'access'              => 'Acceder',
     'choose'              => 'Seleccione una opción',
     'save'                => 'Guardar',
     'file'                => 'Archivo',

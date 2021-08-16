@@ -4,7 +4,6 @@
     <title>{{ $lang['title'] }} - {{ $lang[$editing ? 'post_edit' : 'post_create'] }}</title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% style="{{ url('assets/admin.css') }}" %}
     {% style="{{ url('assets/materialize.min.css') }}" %}
     {% script="{{ url('assets/materialize.min.js') }}" %}
     {% style="{{ url('assets/simplemde.min.css') }}" %}
@@ -12,6 +11,7 @@
     {% style="{{ url('assets/prism - github.css?date=' . filemtime('assets/prism - github.css')) }}" %}
     {% script="{{ url('assets/prism.js') }}" %}
     {% style="{{ url('assets/font-awesome/css/all.css') }}" %}
+    {% style="{{ url('assets/admin.css') }}" %}
     {% icon="{{ url('favicon.png') }}" %}
 </head>
 <body>
@@ -68,13 +68,18 @@
                 <input id="date" type="text" name="date" class="datepicker" required/>
                 <label for="date" type="text">{{ $lang['label_date'] }}</label>
             </div>
-            <div class="input-field file-field col s12 m6">
+            <div class="input-field file-field col s9 m5">
                 <div class="btn light-blue darken-1">
-                    <span>{{ $lang['label_image'] }}</span>
+                    <i class="fa fa-upload"></i>
                     <input type="file" name="file_image"/>
                 </div>
                 <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" value="{{ $post['image'] ?? '' }}" name="image"/>
+                    <input id="image-name" class="file-path validate" type="text" value="{{ $post['image'] ?? '' }}" name="image"/>
+                </div>
+            </div>
+            <div class="input-field col s3 m1">
+                <div class="btn light-blue darken-1 right modal-trigger" href="#modal">
+                    <i class="fa fa-image"></i>
                 </div>
             </div>
         </div>
@@ -85,12 +90,31 @@
             </div>
         </div>
     </form>
+
+    <!-- Modal Structure -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h4>{{ $lang['images'] }}</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{ $lang['label_image'] }}</th>
+                        <th>{{ $lang['label_name'] }}</th>
+                        <th>{{ $lang['label_resolution'] }}</th>
+                    </tr>
+                </thead>
+                <tbody id="images-list">
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
 
 <script>
 let editor_active = false;
 let simplemde = null;
+let modal = null;
 
 function toggleEditor() {
     editor_active = !editor_active;
@@ -120,6 +144,26 @@ toggleEditor();
 
 document.addEventListener('DOMContentLoaded', function() {
     M.FormSelect.init(document.querySelectorAll('select'));
+    modal = M.Modal.init(document.querySelectorAll('.modal'), {
+        onOpenStart: () => {
+            fetch('{{ url("admin/image/get") }}')
+                .then(res => res.json())
+                .then(res => {
+                    let img_list = '';
+                    res.map(img => {
+                        img_list += `
+                            <tr onClick="document.getElementById('image-name').value = '${img.name}'; modal.close();">
+                                <td><img src="{{ url(config('image_options.dir')) }}/${img.name}" style="width: 100%;"/></td>
+                                <td><span class="three-dots">${img.name}</span></td>
+                                <td>${img.resolution}</td>
+                            </tr>`;
+                    });
+
+                    document.getElementById('images-list').innerHTML = img_list;
+                });
+        }
+    })[0];
+
     let date = '{{ $post["date"] ?? date("Y-m-d") }}'.split('-');
     let picker = M.Datepicker.init(document.querySelectorAll('.datepicker'), {
         setDefaultDate: true,

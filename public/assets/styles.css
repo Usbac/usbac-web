@@ -314,6 +314,12 @@ footer > *:not(:last-child) {
 
 /* --- RESPONSIVE --- */
 
+@media screen and (min-width: 1500px) {
+    .post-card > img {
+        max-height: 200px;
+    }
+}
+
 @media screen and (max-width: 840px) {
     .post-card {
         flex-direction: column;
@@ -322,9 +328,6 @@ footer > *:not(:last-child) {
     .post-card > img {
         width: 100%;
         max-height: inherit;
-    }
-
-    .post-card > img {
         margin-right: 0;
         margin-bottom: var(--spacing-sm);
     }
@@ -342,10 +345,7 @@ footer > *:not(:last-child) {
 }
 
 @media screen and (max-width: 700px) {
-    .project {
-        width: 100%;
-    }
-
+    .project,
     .post-img {
         width: 100%;
     }

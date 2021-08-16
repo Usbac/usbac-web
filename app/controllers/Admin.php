@@ -35,7 +35,9 @@ class Admin extends \Wolff\Core\Controller
     {
         Session::start();
         Session::unset('login');
-        View::render('admin/login');
+        View::render('admin/login', [
+            'lang' => Language::get('admin'),
+        ]);
     }
 
 

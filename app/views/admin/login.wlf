@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Usbac - Admin</title>
+    <title>{{ $lang['title'] }} - {{ $lang['admin'] }}</title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% style="{{ url('styles_admin.css') }}" %}
@@ -10,14 +10,14 @@
 <body>
     <form class="container" action="{{ url('admin/start') }}" method="post">
         <div class="form-section">
-            <span>Nombre:</span>
+            <span>{{ $lang['label_name'] }}:</span>
             <input type="text" name="name" value="" required></input>
         </div>
         <div class="form-section">
-            <span>Contraseña:</span>
+            <span>{{ $lang['label_password'] }}:</span>
             <input type="password" name="password" value="" required></input>
         </div>
-        <button type="submit">Acceder</button>
+        <button type="submit">{{ $lang['access'] }}</button>
     </form>
 </body>
 </html>

@@ -8,8 +8,6 @@
 
 {% $page = getCurrentPage(); %}
 
-
-
 <ul id="slide-out" class="sidenav sidenav-fixed">
     <li><a href="{{ url() }}" target="_blank"><img src="{{ url('usbac.png') }}" class="logo"/></a></li>
     <li selected="{{ strpos($page, 'admin/post/list') === 0 }}"><a href="{{ url('admin/post/list') }}"><i class="fas fa-list"></i> {{ $lang['posts'] }}</a></li>

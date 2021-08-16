@@ -27,6 +27,7 @@ Route::post('admin/post/save', [ Controller\Admin\Post::class, 'save' ]);
 Route::get('admin/image/list', [ Controller\Admin\Image::class, 'list' ]);
 Route::get('admin/image/delete', [ Controller\Admin\Image::class, 'delete' ]);
 Route::post('admin/image/add', [ Controller\Admin\Image::class, 'save' ]);
+Route::get('json:admin/image/get', [ Controller\Admin\Image::class, 'getImages' ]);
 
 Route::get('admin/category/list', [ Controller\Admin\Category::class, 'list' ]);
 Route::get('admin/category/edit/{id?}', [ Controller\Admin\Category::class, 'edit' ]);

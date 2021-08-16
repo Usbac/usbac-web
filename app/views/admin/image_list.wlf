@@ -4,10 +4,10 @@
     <title>{{ $lang['title'] }} - {{ $lang['images'] }}</title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% style="{{ url('assets/admin.css') }}" %}
     {% style="{{ url('assets/materialize.min.css') }}" %}
     {% script="{{ url('assets/materialize.min.js') }}" %}
-    {% style="{{ url('assets/font-awesome/css/all.css') }}"%}
+    {% style="{{ url('assets/font-awesome/css/all.css') }}" %}
+    {% style="{{ url('assets/admin.css') }}" %}
     {% icon="{{ url('favicon.png') }}" %}
 </head>
 <body>
