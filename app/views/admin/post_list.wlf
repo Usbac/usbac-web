@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ $lang['title'] }} - {{ $lang['posts'] }}</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% style="{{ url('assets/admin.css') }}" %}
+    {% style="{{ url('assets/materialize.min.css') }}" %}
+    {% script="{{ url('assets/materialize.min.js') }}" %}
+    {% style="{{ url('assets/font-awesome/css/all.css') }}"%}
+    {% icon="{{ url('favicon.png') }}" %}
+</head>
+<body>
+    @include('admin/header')
+    <div class="container">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>{{ $lang['label_title'] }}</th>
+                    <th>{{ $lang['label_image'] }}</th>
+                    <th>{{ $lang['label_category'] }}</th>
+                    <th>{{ $lang['label_date'] }}</th>
+                    <th class="text-center">{{ $lang['label_status'] }}</th>
+                    <th>{{ $lang['label_actions'] }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% foreach ($posts as $post): %}
+                    <tr>
+                        <td><a href="{{ url('post/' . $post['post_id']) }}" target="_blank">{{ $post['title'] }}</a></td>
+                        <td>
+                            <img
+                                src="{{ url('post-img/' . $post['image']) }}"
+                                data-caption="{{ $post['title'] }}"
+                                class="materialboxed"
+                                width="140"
+                            >
+                        </td>
+                        <td>{{ $post['category'] }}</td>
+                        <td>{{ $post['date'] }}</td>
+                        <td class="text-center" style="opacity: 0.7">
+                            <i class="fas fa-{{ $post['status'] ? 'eye' : 'eye-slash' }} fa-lg"></i>
+                        </td>
+                        <td>
+                            <a href="{{ url('admin/post/edit/' . $post['post_id']) }}"><i class="fas fa-edit fa-lg"></i></a>
+                            <a href="#" onClick="deletePost({{ $post['post_id'] }}, '{{ $post['title'] }}')"><i class="fas fa-trash fa-lg"></i></a>
+                        </td>
+                    </tr>
+                {% endforeach %}
+            </tbody>
+        </table>
+
+        <div class="fixed-action-btn">
+            <a href="{{ url('admin/post/edit') }}" class="btn-floating btn-large light-blue darken-1">
+                <i class="fas fa-plus fa-lg"></i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+function deletePost(id, name) {
+    if (confirm(`¿{{ $lang['delete_post'] }} "${name}"?`)) {
+        location.href = "{{ url('admin/post/delete') }}?id=" + id;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    M.Materialbox.init(document.querySelectorAll('.materialboxed'));
+    M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'));
+});
+</script>

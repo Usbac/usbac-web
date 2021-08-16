@@ -6,3 +6,4 @@ public/wp-content
 sitemap.xml
 composer.lock
 vendor
+.DS_Store

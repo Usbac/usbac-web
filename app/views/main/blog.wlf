@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ $lang['title'] }} - {{ $lang[$page] }}</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ $lang['blog_description'] }}">
+    {% style="{{ url('assets/materialize.min.css') }}" %}
+    {% script="{{ url('assets/materialize.min.js') }}" %}
+    {% style="{{ url('assets/styles.css?date=' . filemtime('assets/styles.css')) }}" %}
+    {% icon="{{ url('favicon.png') }}" %}
+</head>
+<body>
+    @include('main/header')
+    <div class="container">
+        <div class="row">
+            <form class="input-field col s12 m6 push-m3" method="get" action="{{ url('blog') }}">
+                <input name="search" type="text" class="" value="{{ $search }}"/>
+                <label for="title">{{ $lang['search'] }}</label>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col m12">
+                {% foreach ($posts as $post): %}
+                    @include('main/post_card')
+                {% endforeach %}
+                {% if (empty($posts)): %}
+                    <p class="text-center">{{ $lang['no_results'] }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <ul class="pagination center">
+            {% foreach ($pagination as $page): %}
+                <li class="{{ $page['current_page'] ? 'active blue' : '' }}">
+                    <a href="{{ $page['url'] }}">{{ $page['index'] }}</a>
+                </li>
+            {% endforeach %}
+        </ul>
+    </div>
+    @include('main/footer')
+</body>
+</html>

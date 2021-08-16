@@ -1,0 +1,17 @@
+<footer>
+    <div>
+        <a href="https://www.youtube.com/c/theusbac" target="_blank"><img src="{{ url('icons/youtube.png') }}" width="48"/></a>
+        <a href="https://github.com/usbac" target="_blank"><img src="{{ url('icons/github.png') }}" width="48"/></a>
+        <a href="https://www.instagram.com/usbac_" target="_blank"><img src="{{ url('icons/instagram.png') }}" width="48"/></a>
+    </div>
+    <div class="hosting">
+        <span>{! $lang['footer_hosting'] !}</span>
+        <img
+            style="vertical-align: middle;"
+            src="https://webmediaplus.com/branding/icon-branding.png"
+            alt="Webmedia Logo"
+            width="30"
+            height="auto"
+        />
+    </div>
+</footer>

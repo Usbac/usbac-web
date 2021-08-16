@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ $lang['title'] }} - {{ $title }}</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ $lang['blog_description'] }}">
+    {% style="{{ url('assets/materialize.min.css') }}" %}
+    {% script="{{ url('assets/materialize.min.js') }}" %}
+    {% style="{{ url('assets/styles.css?date=' . filemtime('assets/styles.css')) }}" %}
+    {% style="{{ url('assets/prism - github.css?date=' . filemtime('prism - github.css')) }}" %}
+    {% script="{{ url('assets/prism.js') }}" %}
+    {% style="{{ url('assets/code.css?date=' . filemtime('assets/code.css')) }}" %}
+    {% icon="{{ url('favicon.png') }}" %}
+</head>
+<body>
+    @include('main/header')
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <div class="post-img">
+                    <img
+                        src="{{ url('post-img/' . $image) }}"
+                        loading="lazy"
+                        class="materialboxed"
+                        data-caption="{{ $description }}"
+                    />
+                </div>
+                <h4>{{ $title }}</h4>
+                <span class="post-details">
+                    <img src="{{ url('icons/clock.png') }}" width="24"/>
+                    &nbsp;{{ $date }} · {{ $category }} · {{ $lang['lecture_time'] }} {{ $time }} {{ $lang['minutes_suffix'] }}
+                </span>
+                <div class="post-content">{! $html !}</div>
+                <div id="disqus_thread"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m12">
+                <h4 class="text-center">{{ $lang['other_post'] }}</h4>
+                <div class="row">
+                    {% foreach ($others as $other): %}
+                        <a class="col s12 m4 post-card sm" href="{{ url('post/' . $other['post_id']) }}">
+                            <img src="{{ url('post-img/' . $other['image']) }}" style="width: 100%;"/>
+                            <div>
+                                <h5>{{ $other['title'] }}</h5>
+                                <p>{{ $other['date'] }} · {{ $other['category'] }} · {{ $other['time'] }} {{ $lang['minutes_suffix'] }}</p>
+                            </div>
+                        </a>
+                    {% endforeach %}
+                </div>
+            </div>
+        </div>
+    </div>
+    @include('main/footer')
+</body>
+</html>
+
+<script id="dsq-count-scr" src="//usbac.disqus.com/count.js" async></script>
+
+<script>
+let disqus_config = function () {
+    this.page.url = window.location.href;
+    this.page.identifier = 'post/{{ $post_id }}';
+};
+
+let script = document.createElement('script');
+script.src = 'https://usbac.disqus.com/embed.js';
+script.setAttribute('data-timestamp', +new Date());
+(document.head || document.body).appendChild(script);
+
+document.addEventListener('DOMContentLoaded', function(e) {
+    M.Materialbox.init(document.querySelectorAll('.materialboxed'));
+});
+</script>

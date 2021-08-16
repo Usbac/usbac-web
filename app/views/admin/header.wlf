@@ -1,0 +1,27 @@
+<nav class="light-blue darken-4 hide-on-large-only">
+    <div class="nav-wrapper">
+        <a href="#" data-target="slide-out" class="sidenav-trigger">
+            <i class="fas fa-bars fa-2x"></i>
+        </a>
+    </div>
+</nav>
+
+{% $page = getCurrentPage(); %}
+
+
+
+<ul id="slide-out" class="sidenav sidenav-fixed">
+    <li><a href="{{ url() }}" target="_blank"><img src="{{ url('usbac.png') }}" class="logo"/></a></li>
+    <li selected="{{ strpos($page, 'admin/post/list') === 0 }}"><a href="{{ url('admin/post/list') }}"><i class="fas fa-list"></i> {{ $lang['posts'] }}</a></li>
+    <li selected="{{ strpos($page, 'admin/category/list') === 0 }}"><a href="{{ url('admin/category/list') }}"><i class="fas fa-tags"></i> {{ $lang['categories'] }}</a></li>
+    <li selected="{{ strpos($page, 'admin/image/list') === 0 }}"><a href="{{ url('admin/image/list') }}"><i class="fas fa-image"></i> {{ $lang['images'] }}</a></li>
+    <li selected="{{ strpos($page, 'admin/option/list') === 0 }}"><a href="{{ url('admin/option/list') }}"><i class="fas fa-cog"></i> {{ $lang['options'] }}</a></li>
+    <li><div class="divider"></div></li>
+    <li><a href="{{ url('admin') }}"><i class="fas fa-sign-out-alt"></i> {{ $lang['logout'] }}</a></li>
+</ul>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    M.Sidenav.init(document.querySelectorAll('.sidenav'));
+});
+</script>

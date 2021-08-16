@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="{{ url('assets/light.css') }}" id="dark">
+<script>
+let dark = document.getElementById('dark');
+dark.media = localStorage.getItem('dark_on');
+</script>
+
+<header>
+    <a href="{{ url() }}">
+        <img id="logo" src="{{ url('usbac.png') }}" alt="Usbac logo"/>
+    </a>
+    <div>
+        {% $page = $page ?? ''; %}
+        <h5><a href="{{ url() }}" selected="{{ $page == 'home' }}">{{ $lang['home'] }}</a></h5>
+        <h5><a href="{{ url('blog') }}" selected="{{ $page == 'blog' }}">{{ $lang['blog'] }}</a></h5>
+        <h5><a href="{{ url('contact') }}" selected="{{ $page == 'contact' }}">{{ $lang['contact'] }}</a></h5>
+        <div class="switch">
+            <label>
+                <input id="dark-switch" type="checkbox" onclick="toggleDark()">
+                <span class="lever"></span>
+            </label>
+        </div>
+    </div>
+</header>
+
+
+<script>
+function toggleDark() {
+    let media = dark.media == '' ? 'none' : '';
+    dark.media = media;
+    localStorage.setItem('dark_on', media);
+}
+
+document.getElementById('dark-switch').checked = dark.media == null || dark.media == 'none';
+</script>

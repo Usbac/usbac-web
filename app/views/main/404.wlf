@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ $lang['title'] }} - 404</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ $lang['404_description'] }}">
+    {% style="{{ url('assets/materialize.min.css') }}" %}
+    {% script="{{ url('assets/materialize.min.js') }}" %}
+    {% style="{{ url('assets/styles.css') }}" %}
+    {% icon="{{ url('favicon.png') }}" %}
+</head>
+<body>
+    <div class="container not-found">
+        <a href="{{ url() }}">
+            <img src="{{ url('usbac.png') }}" alt="Usbac logo" width="240"/>
+        </a>
+        <h2>404</h2>
+        <p>{{ $lang['404_description'] }}</p>
+    </div>
+</body>
+</html>

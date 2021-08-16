@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7ZPTRRW858"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7ZPTRRW858');
+    </script>
+    <title>{{ $lang['title'] }}</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ $lang['home_description'] }}">
+    {% style="{{ url('assets/materialize.min.css') }}" %}
+    {% script="{{ url('assets/materialize.min.js') }}" %}
+    {% style="{{ url('assets/styles.css?date=' . filemtime('assets/styles.css')) }}" %}
+    {% icon="{{ url('favicon.png') }}" %}
+</head>
+<body>
+    @include('main/header')
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h4 class="text-center">{{ $lang['last_posts'] }}</h4>
+                {% foreach (array_slice($posts, 0, 4) as $post): %}
+                    @include('main/post_card')
+                {% endforeach %}
+                <a class="see-more link" href="{{ url('blog') }}">{{ $lang['see_more'] }}</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4 class="text-center">{{ $lang['projects'] }}</h4>
+                <div class="project-container">
+                    {% foreach ($projects as $project): %}
+                        <div class="project">
+                            <img
+                                src="{{ url('projects/' . $project['img']) }}"
+                                alt="{{ $project['title'] }} logo"
+                                loading="lazy"
+                            />
+                            <div>
+                                <div class="project-title">
+                                    <h5><a href="{{ $project['url'] }}">{{ $project['title'] }}</a></h5>
+                                    <span>{{ $project['language'] }}</span>
+                                </div>
+                                <p>{{ $project['description'] }}</p>
+                                <a class="link" href="{{ $project['url'] }}">{{ $lang['version'] }} {{ $project['version'] }}</a>
+                            </div>
+                        </div>
+                    {% endforeach %}
+                </div>
+            </div>
+        </div>
+    </div>
+    @include('main/footer')
+</body>
+</html>
+

@@ -1,0 +1,64 @@
+code:not([class*="language-"]) {
+    font-size: 14px;
+}
+
+pre[class*="language-"] {
+    border: 1px #353535 solid;
+    padding: 12px;
+    border-radius: var(--border-radius);
+}
+
+code[class*="language-"],
+pre[class*="language-"],
+code[class*="language-"],
+pre[class*="language-"] {
+    background: #191919 !important;
+    font-size: 14px;
+    line-height: 1.3em;
+    overflow-x: auto;
+}
+
+code,
+code .token.constant {
+    color: white !important;
+}
+
+code .token.operator {
+    color: #cccccc;
+}
+
+code .token.number {
+    color: #b5cea8;
+}
+
+code .token.keyword {
+    color: #569cd6;
+}
+
+code .token.punctuation {
+    color: white;
+}
+
+code .token.class-name {
+    color: #4ec9b0;
+}
+
+code .token.function {
+    color: #e6e6b3;
+}
+
+code .token.string {
+    color: #ce9178;
+}
+
+code .token.variable {
+    color: #9cdcfe;
+}
+
+code .token.comment {
+    color: #6a9955;
+}
+
+code .token.boolean {
+    color: #569cd6 !important;
+}

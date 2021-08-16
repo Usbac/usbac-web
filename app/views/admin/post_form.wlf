@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ $lang['title'] }} - {{ $lang[$editing ? 'post_edit' : 'post_create'] }}</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% style="{{ url('assets/admin.css') }}" %}
+    {% style="{{ url('assets/materialize.min.css') }}" %}
+    {% script="{{ url('assets/materialize.min.js') }}" %}
+    {% style="{{ url('assets/simplemde.min.css') }}" %}
+    {% script="{{ url('assets/simplemde.min.js') }}" %}
+    {% style="{{ url('assets/prism - github.css?date=' . filemtime('assets/prism - github.css')) }}" %}
+    {% script="{{ url('assets/prism.js') }}" %}
+    {% style="{{ url('assets/font-awesome/css/all.css') }}" %}
+    {% icon="{{ url('favicon.png') }}" %}
+</head>
+<body>
+    @include('admin/header')
+    <form class="container" action="{{ url('admin/post/save?id=' . $id) }}" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="title" name="title" type="text" required value="{{ $post['title'] ?? '' }}"/>
+                <label for="title">{{ $lang['label_title'] }}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea
+                    id="description"
+                    name="description"
+                    class="materialize-textarea"
+                    required
+                >{{ $post['description'] ?? '' }}</textarea>
+                <label for="description">{{ $lang['label_description'] }}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea name="content" id="editor" class="input-content">{{ $post['content'] ?? '' }}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <select name="status" required>
+                    {% $status = $post['status'] ?? 0; %}
+                    <option value="" disabled selected>{{ $lang['choose'] }}</option>
+                    <option value="1" {% if ($status): %} selected {% endif %}>{{ $lang['enabled'] }}</option>
+                    <option value="0" {% if (!$status): %} selected {% endif %}>{{ $lang['disabled'] }}</option>
+                </select>
+                <label>{{ $lang['label_status'] }}</label>
+            </div>
+            <div class="input-field col s12 m6">
+                <select name="category_id" required>
+                    {% $category_id = $post['category_id'] ?? 0; %}
+                    <option value="" disabled selected>{{ $lang['choose'] }}</option>
+                    {% foreach ($categories as $category): %}
+                        <option
+                            value="{{ $category['category_id'] }}"
+                            {% if ($category['category_id'] == $category_id): %} selected {% endif %}
+                        >{{ $category['name'] }}</option>
+                    {% endforeach %}
+                </select>
+                <label>{{ $lang['label_category'] }}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <input id="date" type="text" name="date" class="datepicker" required/>
+                <label for="date" type="text">{{ $lang['label_date'] }}</label>
+            </div>
+            <div class="input-field file-field col s12 m6">
+                <div class="btn light-blue darken-1">
+                    <span>{{ $lang['label_image'] }}</span>
+                    <input type="file" name="file_image"/>
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" value="{{ $post['image'] ?? '' }}" name="image"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m12">
+                <a href="#editor" onClick="toggleEditor()">{{ $lang['textarea_change'] }}</a>
+                <button class="btn light-blue darken-1 right" type="submit">{{ $lang['save'] }}</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+<script>
+let editor_active = false;
+let simplemde = null;
+
+function toggleEditor() {
+    editor_active = !editor_active;
+
+    if (editor_active) {
+        simplemde = new SimpleMDE({
+            element: document.getElementById('editor'),
+            placeholder: '{{ $lang["placeholder_content"] }}',
+            spellChecker: false,
+            tabSize: 4,
+            autosave: {
+                enabled: true,
+                uniqueId: '{{ $id }}',
+                delay: 1000,
+            },
+            insertTexts: {
+                image: ['![](', ')'],
+                link: ['[', '](http://)'],
+            },
+        });
+    } else {
+        simplemde.toTextArea();
+    }
+}
+
+toggleEditor();
+
+document.addEventListener('DOMContentLoaded', function() {
+    M.FormSelect.init(document.querySelectorAll('select'));
+    let date = '{{ $post["date"] ?? date("Y-m-d") }}'.split('-');
+    let picker = M.Datepicker.init(document.querySelectorAll('.datepicker'), {
+        setDefaultDate: true,
+        defaultDate: new Date(date[0], date[1] - 1, date[2]),
+        format: 'yyyy-mm-dd',
+        autoClose: true,
+    });
+});
+</script>

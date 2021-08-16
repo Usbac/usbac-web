@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ $lang['title'] }} - {{ $lang['categories'] }}</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% style="{{ url('assets/admin.css') }}" %}
+    {% style="{{ url('assets/materialize.min.css') }}" %}
+    {% script="{{ url('assets/materialize.min.js') }}" %}
+    {% style="{{ url('assets/font-awesome/css/all.css') }}" %}
+    {% icon="{{ url('favicon.png') }}" %}
+</head>
+<body>
+    @include('admin/header')
+    <div class="container">
+        <ul class="collection">
+            <a href="{{ url('admin/option/clearCache') }}" class="collection-item light-blue-text">{{ $lang['clear_cache'] }}</a>
+            <a href="{{ url('admin/option/dbDownload') }}" class="collection-item light-blue-text">{{ $lang['db_download'] }}</a>
+            <a href="#" onClick="db_file.click()" class="collection-item light-blue-text">{{ $lang['db_upload'] }}</a>
+            <a href="{{ url('admin/option/phpinfo') }}" target="_blank" class="collection-item light-blue-text">{{ $lang['php_info'] }}</a>
+        </ul>
+        <form id="db-form" action="{{ url('admin/option/dbUpload') }}" method="post" enctype="multipart/form-data">
+            <input id="db-file" type="file" name="db" style="display: none" onChange="dbUpload()"/>
+        </form>
+    </div>
+</body>
+</html>
+
+<script>
+let db_file = document.getElementById('db-file');
+
+function dbUpload() {
+    if (confirm('{{ $lang["db_upload_confirm"] }} "' +
+        db_file.value.split(/(\\|\/)/g).pop() + '"')) {
+        document.getElementById('db-form').submit();
+    }
+}
+
+let msg = '{{ $msg }}';
+
+if (msg) {
+    M.toast({ html: msg });
+}
+</script>

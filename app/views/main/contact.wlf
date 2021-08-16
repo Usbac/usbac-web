@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ $lang['title'] }} - {{ $lang[$page] }}</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ $lang['contact_description'] }}">
+    {% style="{{ url('assets/materialize.min.css') }}" %}
+    {% script="{{ url('assets/materialize.min.js') }}" %}
+    {% style="{{ url('assets/styles.css?date=' . filemtime('assets/styles.css')) }}" %}
+    {% icon="{{ url('favicon.png') }}" %}
+</head>
+<body>
+    @include('main/header')
+    <div class="container">
+        <div class="row">
+            <form class="col m12" method="post" action="{{ url('contact/send') }}">
+                <p class="contact-element">{{ $lang['contact_subtitle'] }}</p>
+                <a class="contact-element link" href="mailto:{{ $email }}">{{ $email }}</a>
+                <div class="row">
+                    <div class="input-field col m6 s12">
+                        <input type="text" id="title" required/>
+                        <label for="title">{{ $lang['title_label'] }}</label>
+                    </div>
+                    <div class="input-field col m6 s12">
+                        <input type="email" id="email" required/>
+                        <label for="email">{{ $lang['email_label'] }}</label>
+                    </div>
+                </div>
+                <div class="input-field">
+                    <textarea id="content" class="materialize-textarea" required></textarea>
+                    <label for="content">{{ $lang['content_label'] }}</label>
+                </div>
+                <button class="btn blue right" type="submit" name="action">
+                    {{ $lang['send'] }}
+                </button>
+            </form>
+        </div>
+    </div>
+    @include('main/footer')
+</body>
+</html>
+
+<script>
+if ('{{ $msg }}') {
+    M.toast({ html: `{{ $msg }}` });
+}
+</script>

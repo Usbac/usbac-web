@@ -1,0 +1,10 @@
+<div class="post-card">
+    <img src="{{ url('post-img/' . $post['image']) }}" loading="lazy"/>
+    <div>
+        <h5><a href="{{ url('post/' . $post['post_id']) }}">{{ $post['title'] }}</a></h5>
+        <span class="post-details">
+            <img src="{{ url('icons/clock.png') }}" width="24"/>&nbsp;<span>{{ $post['date'] }} · {{ $post['category'] }} · {{ $post['time'] }} {{ $lang['minutes_suffix'] }}</span>
+        </span>
+        <p>{{ $post['description'] }}</p>
+    </div>
+</div>
