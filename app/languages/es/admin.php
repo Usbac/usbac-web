@@ -2,6 +2,7 @@
 
 return [
     'title'               => 'Usbac',
+    'admin'               => 'Admin',
     'post'                => 'Post',
     'posts'               => 'Posts',
     'post_create'         => 'Crear post',

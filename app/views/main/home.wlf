@@ -36,12 +36,14 @@
                 <div class="project-container">
                     {% foreach ($projects as $project): %}
                         <div class="project">
-                            <img
-                                src="{{ url('projects/' . $project['img']) }}"
-                                alt="{{ $project['title'] }} logo"
-                                loading="lazy"
-                            />
-                            <div>
+                            <div class="img">
+                                <img
+                                    src="{{ url('projects/' . $project['img']) }}"
+                                    alt="{{ $project['title'] }} logo"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div class="content">
                                 <div class="project-title">
                                     <h5><a href="{{ $project['url'] }}">{{ $project['title'] }}</a></h5>
                                     <span>{{ $project['language'] }}</span>

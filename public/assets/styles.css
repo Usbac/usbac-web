@@ -237,21 +237,26 @@ input, textarea {
     width: calc(50% - (var(--spacing-sm) * 2));
 }
 
-.project > img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
+.project > .img {
+    width: 105px;
+    height: 105px;
     margin-right: var(--spacing-sm);
 }
 
-.project > div {
+.project > .img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.project > .content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
 }
 
-.project > div > * {
+.project > .content > * {
     display: block;
     margin: 0;
     margin-bottom: var(--spacing-xs);
