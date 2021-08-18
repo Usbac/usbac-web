@@ -14,40 +14,6 @@ class Home extends \Wolff\Core\Controller
     const EMAIL = 'contacto@usbac.com.ve';
     const PER_PAGE = 6;
     const SIDE_PAGES = 2;
-    const PROJECTS = [
-        [
-            'title'       => 'Borealis',
-            'img'         => 'borealis.png',
-            'url'         => 'https://github.com/usbac/borealis',
-            'language'    => 'ANSI C',
-            'description' => 'Lenguaje de programación elegante y consistente.',
-            'version'     => '0.1.0',
-        ],
-        [
-            'title'       => 'Wolff',
-            'img'         => 'wolff.png',
-            'url'         => 'https://github.com/usbac/wolff',
-            'language'    => 'PHP',
-            'description' => 'Framework ligero y rapido para construir paginas web.',
-            'version'     => '3.2.2',
-        ],
-        [
-            'title'       => 'Tundra',
-            'img'         => 'tundra.png',
-            'url'         => 'https://github.com/usbac/tundra',
-            'language'    => 'Javascript',
-            'description' => 'Motor de plantillas personalizable para NodeJS.',
-            'version'     => '2.0.1',
-        ],
-        [
-            'title'       => 'Quich',
-            'img'         => 'quich.png',
-            'url'         => 'https://github.com/usbac/quich',
-            'language'    => 'ANSI C',
-            'description' => 'Calculadora con opciones avanzadas para el terminal.',
-            'version'     => '3.0.0',
-        ],
-    ];
 
 
     /**
@@ -58,7 +24,6 @@ class Home extends \Wolff\Core\Controller
         View::render('main/home', [
             'lang'     => Language::get('main'),
             'page'     => 'home',
-            'projects' => self::PROJECTS,
             'posts'    => $this->getPosts('', 0),
         ]);
     }
@@ -163,7 +128,7 @@ class Home extends \Wolff\Core\Controller
 
     private function getPosts($search = '', $page = 1)
     {
-        $search = '%' . $search . '%';
+        $search = "%$search%";
         $posts = Container::get('db')->query("SELECT p.*, c.name as category FROM post p
             INNER JOIN category c ON p.category_id = c.category_id
             WHERE p.status = 1 AND (p.title LIKE ? OR p.description LIKE ?)

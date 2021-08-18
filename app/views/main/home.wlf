@@ -34,7 +34,7 @@
             <div class="col">
                 <h4 class="text-center">{{ $lang['projects'] }}</h4>
                 <div class="project-container">
-                    {% foreach ($projects as $project): %}
+                    {% foreach ($lang['projects_list'] as $project): %}
                         <div class="project">
                             <div class="img">
                                 <img

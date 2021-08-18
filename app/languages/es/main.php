@@ -29,4 +29,38 @@ return [
     'content_label'       => 'Contenido',
     'other_post'          => 'Otros posts',
     'dark'                => 'Oscuro',
+    'projects_list'    => [
+        [
+            'title'       => 'Borealis',
+            'img'         => 'borealis.png',
+            'url'         => 'https://github.com/usbac/borealis',
+            'language'    => 'ANSI C',
+            'description' => 'Lenguaje de programación elegante y consistente.',
+            'version'     => '0.1.0',
+        ],
+        [
+            'title'       => 'Wolff',
+            'img'         => 'wolff.png',
+            'url'         => 'https://github.com/usbac/wolff',
+            'language'    => 'PHP',
+            'description' => 'Framework ligero y rapido para construir paginas web.',
+            'version'     => '3.2.2',
+        ],
+        [
+            'title'       => 'Tundra',
+            'img'         => 'tundra.png',
+            'url'         => 'https://github.com/usbac/tundra',
+            'language'    => 'Javascript',
+            'description' => 'Motor de plantillas personalizable para NodeJS.',
+            'version'     => '2.0.1',
+        ],
+        [
+            'title'       => 'Quich',
+            'img'         => 'quich.png',
+            'url'         => 'https://github.com/usbac/quich',
+            'language'    => 'ANSI C',
+            'description' => 'Calculadora con opciones avanzadas para el terminal.',
+            'version'     => '3.0.0',
+        ],
+    ],
 ];
