@@ -163,19 +163,6 @@ class Home extends \Wolff\Core\Controller
 
     private function getDate($date)
     {
-        return strtr(strftime('%e %B %Y', strtotime($date)), [
-            'January'   => 'Ene',
-            'February'  => 'Feb',
-            'March'     => 'Mar',
-            'April'     => 'Abr',
-            'May'       => 'May',
-            'June'      => 'Jun',
-            'July'      => 'Jul',
-            'August'    => 'Ago',
-            'September' => 'Sep',
-            'October'   => 'Oct',
-            'November'  => 'Nov',
-            'December'  => 'Dic',
-        ]);
+        return strtr(strftime('%e %B %Y', strtotime($date)), Language::get('main.months'));
     }
 }
