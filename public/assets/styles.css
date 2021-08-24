@@ -59,6 +59,10 @@ header > div > h5 > a[selected="1"] {
     width: 300px;
 }
 
+.container {
+    max-width: 1100px;
+}
+
 .container > *:not(:last-child) {
     margin-bottom: var(--spacing-bg);
 }
