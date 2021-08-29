@@ -31,7 +31,7 @@
                     <img src="{{ url('icons/clock.png') }}" width="24"/>
                     &nbsp;{{ $date }} · {{ $category }} · {{ $lang['lecture_time'] }} {{ $time }} {{ $lang['minutes_suffix'] }}
                 </span>
-                <div class="post-content">{! $html !}</div>
+                <article>{! $html !}</article>
                 <div id="disqus_thread"></div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                             <img src="{{ url('post-img/' . $other['image']) }}" style="width: 100%;"/>
                             <div>
                                 <h5>{{ $other['title'] }}</h5>
-                                <p>{{ $other['date'] }} · {{ $other['category'] }} · {{ $other['time'] }} {{ $lang['minutes_suffix'] }}</p>
+                                <p>{{ getPostInfoLine($other['date'], $other['category'], $other['time']) }}</p>
                             </div>
                         </a>
                     {% endforeach %}

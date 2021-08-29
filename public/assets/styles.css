@@ -179,36 +179,36 @@ input, textarea {
     src: url('../fonts/RobotoRegular.ttf');
 }
 
-.post-content {
+article {
     font-family: 'Times New Roman', Times, serif;
     font-size: 20px;
     line-height: 1.4em;
 }
 
-.post-content h2 {
+article h2 {
     font-size: 1.5em;
 }
 
-.post-content h3 {
+article h3 {
     font-size: 1.3em;
 }
 
-.post-content h4 {
+article h4 {
     font-size: 1.1em;
 }
 
-.post-content h1,
-.post-content h2,
-.post-content h3,
-.post-content h4,
-.post-content h5 {
+article h1,
+article h2,
+article h3,
+article h4,
+article h5 {
     font-family: 'roboto';
     margin-block-start: var(--spacing-md);
     margin-block-end: var(--spacing-sm);
 }
 
-.post-content > * > img,
-.post-content > img {
+article > * > img,
+article > img {
     display: block;
     max-width: 70%;
     max-height: 350px;
@@ -217,7 +217,7 @@ input, textarea {
     margin-bottom: var(--spacing-md);
 }
 
-.post-content > p + p > em {
+article > p + p > em {
     display: block;
     text-align: center;
     margin-top: calc(var(--spacing-xs) * -1);

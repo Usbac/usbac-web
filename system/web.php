@@ -60,3 +60,7 @@ Middleware::before('admin/*', function () {
         redirect(url('admin'));
     }
 });
+
+function getPostInfoLine($date, $category, $time) {
+    return "$date · $category · $time " . Wolff\Core\Language::get('main')['minutes_suffix'];
+}
