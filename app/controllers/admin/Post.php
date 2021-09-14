@@ -17,7 +17,8 @@ class Post extends \Wolff\Core\Controller
     {
         View::render('admin/post_list', [
             'lang'  => Language::get('admin'),
-            'posts' => Container::get('db')->query("SELECT p.*, c.name as category
+            'posts' => Container::get('db')->query("SELECT p.*, c.name as category,
+                (CASE WHEN p.date > DATE('NOW') THEN 1 ELSE 0 END) as pending
                 FROM post p
                 INNER JOIN category c ON p.category_id = c.category_id
                 ORDER BY post_id DESC")->get(),

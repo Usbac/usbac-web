@@ -14,6 +14,7 @@ class Home extends \Wolff\Core\Controller
     const EMAIL = 'contacto@usbac.com.ve';
     const PER_PAGE = 6;
     const SIDE_PAGES = 2;
+    const POST_FILTERS = "p.status = 1 AND p.date <= DATE('NOW')";
 
 
     /**
@@ -60,7 +61,7 @@ class Home extends \Wolff\Core\Controller
     {
         $post = Container::get('db')->query("SELECT p.*, c.name as category FROM post p
             INNER JOIN category c ON c.category_id = p.category_id
-            WHERE p.status = 1 AND p.post_id = ?", $req->query('id') ?? 0)->first();
+            WHERE " . self::POST_FILTERS . " AND p.post_id = ?", $req->query('id') ?? 0)->first();
 
         if (empty($post)) {
             return $res->setHeader('Location', url());
@@ -131,7 +132,7 @@ class Home extends \Wolff\Core\Controller
         $search = "%$search%";
         $posts = Container::get('db')->query("SELECT p.*, c.name as category FROM post p
             INNER JOIN category c ON p.category_id = c.category_id
-            WHERE p.status = 1 AND (p.title LIKE ? OR p.description LIKE ?)
+            WHERE " . self::POST_FILTERS . " AND (p.title LIKE ? OR p.description LIKE ?)
             ORDER BY date DESC
             LIMIT " . ($page - 1) * self::PER_PAGE . ", " . self::PER_PAGE, $search, $search)->get();
 
@@ -151,7 +152,7 @@ class Home extends \Wolff\Core\Controller
 
         return Container::get('db')->query("SELECT * FROM post p
             INNER JOIN category c ON p.category_id = c.category_id
-            WHERE p.status = 1 AND (p.title LIKE ? OR p.description LIKE ?)", $search, $search)->count();
+            WHERE " . self::POST_FILTERS . " AND (p.title LIKE ? OR p.description LIKE ?)", $search, $search)->count();
     }
 
 

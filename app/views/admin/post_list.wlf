@@ -39,7 +39,11 @@
                         <td>{{ $post['category'] }}</td>
                         <td>{{ $post['date'] }}</td>
                         <td class="text-center" style="opacity: 0.7">
-                            <i class="fas fa-{{ $post['status'] ? 'eye' : 'eye-slash' }} fa-lg"></i>
+                            {% if ($post['pending'] && $post['status']): %}
+                                <i class="fas fa-clock fa-lg"></i>
+                            {% else: %}
+                                <i class="fas fa-{{ $post['status'] ? 'eye' : 'eye-slash' }} fa-lg"></i>
+                            {% endif %}
                         </td>
                         <td>
                             <a href="{{ url('admin/post/edit/' . $post['post_id']) }}"><i class="fas fa-edit fa-lg"></i></a>
