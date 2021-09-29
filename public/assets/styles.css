@@ -60,7 +60,7 @@ header > div > h5 > a[selected="1"] {
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 1000px;
 }
 
 .container > *:not(:last-child) {
@@ -343,6 +343,10 @@ footer > *:not(:last-child) {
 }
 
 @media screen and (min-width: 700px) and (max-width: 840px) {
+    .container {
+        width: 94%;
+    }
+
     .project {
         flex-direction: column;
     }
@@ -354,6 +358,7 @@ footer > *:not(:last-child) {
 }
 
 @media screen and (max-width: 700px) {
+    .container,
     .project,
     .post-img {
         width: 100%;
