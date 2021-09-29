@@ -22,10 +22,16 @@ class Home extends \Wolff\Core\Controller
      */
     public function index($req, $res)
     {
+        $posts = $this->getPosts('', 0);
+
+        foreach ($posts as $key => $val) {
+            $posts[$key]['date'] = false;
+        }
+
         View::render('main/home', [
             'lang'     => Language::get('main'),
             'page'     => 'home',
-            'posts'    => $this->getPosts('', 0),
+            'posts'    => $posts,
         ]);
     }
 

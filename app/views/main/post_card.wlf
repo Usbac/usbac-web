@@ -3,7 +3,10 @@
     <div>
         <h5><a href="{{ url('post/' . $post['post_id']) }}">{{ $post['title'] }}</a></h5>
         <span class="post-details">
-            <img src="{{ url('icons/clock.png') }}" width="24"/>&nbsp;<span>{{ getPostInfoLine($post['date'], $post['category'], $post['time']) }}</span>
+            {% if ($post['date']): %}
+                <img src="{{ url('icons/clock.png') }}" width="24"/>&nbsp;
+            {% endif %}
+            <span>{{ getPostInfoLine($post['date'], $post['category'], $post['time']) }}</span>
         </span>
         <p>{{ $post['description'] }}</p>
     </div>

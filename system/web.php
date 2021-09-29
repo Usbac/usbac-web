@@ -62,5 +62,14 @@ Middleware::before('admin/*', function () {
 });
 
 function getPostInfoLine($date, $category, $time) {
-    return "$date · $category · $time " . Wolff\Core\Language::get('main')['minutes_suffix'];
+    $arr = [];
+
+    if ($date) {
+        $arr[] = $date;
+    }
+
+    $arr[] = $category;
+    $arr[] = "$time " . Wolff\Core\Language::get('main')['minutes_suffix'];
+
+    return implode(' · ', $arr);
 }
