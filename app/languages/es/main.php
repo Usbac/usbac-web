@@ -36,7 +36,7 @@ return [
             'url'         => 'https://github.com/usbac/borealis',
             'language'    => 'ANSI C',
             'description' => 'Lenguaje de programación elegante y consistente.',
-            'version'     => '0.1.0',
+            'version'     => '0.2.0',
         ],
         [
             'title'       => 'Wolff',
@@ -44,7 +44,7 @@ return [
             'url'         => 'https://github.com/usbac/wolff',
             'language'    => 'PHP',
             'description' => 'Framework ligero y rapido para construir paginas web.',
-            'version'     => '3.2.2',
+            'version'     => '4.1.0',
         ],
         [
             'title'       => 'Tundra',
@@ -60,7 +60,7 @@ return [
             'url'         => 'https://github.com/usbac/quich',
             'language'    => 'ANSI C',
             'description' => 'Calculadora con opciones avanzadas para el terminal.',
-            'version'     => '3.0.0',
+            'version'     => '4.0.0',
         ],
     ],
     'months' => [
